@@ -3,24 +3,32 @@ import { galleryItems } from './gallery-items.js';
 
 console.log(galleryItems);
 
-const gallery = document.querySelector('.gallery')
-const items = []
-
-galleryItems.forEach(element => {
-	const galleryLink = document.createElement('a')
-	galleryLink.className = 'gallery__link'
-	galleryLink.href = element.original
-	const galleryImage = document.createElement('img')
-	galleryImage.className = 'gallery__image'
-	galleryImage.src = element.preview
-	galleryImage.setAttribute('title', element.description)
-	galleryImage.alt = element.description
-
-	galleryLink.append(galleryImage)
-	items.push(galleryLink)
+const galleryList = document.querySelector('.gallery');
+const galleryMap = galleryItems
+	.map(img => {
+	return `<a class="gallery__item" href="${img.original}">
+  <img class="gallery__image" src="${img.preview}" alt="${img.description}" />
+</a>`;
 })
-gallery.append(...items)
+	.join('');
+galleryList.innerHTML = galleryMap;
 
-new SimpleLightbox('.gallery a', {
-	captionDelay: 250
-})
+galleryList.addEventListener('click', onOpenModal);
+
+function onOpenModal(event) {
+	event.preventDefault();
+	if (!event.target.classList.contains('gallery__image')) {
+		return;
+	}
+}
+
+function onCloseModal(event) {
+	if (event.code === 'Escape') {
+		instance.close();
+	}
+}
+
+const lightbox = new SimpleLightbox('.gallery a', {
+	captionDelay: 250,
+	captionData: 'alt',
+});
