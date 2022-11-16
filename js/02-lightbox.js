@@ -13,16 +13,16 @@ const galleryMap = galleryItems
 	.join('');
 galleryList.innerHTML = galleryMap;
 
-galleryList.addEventListener('click', onOpenModal);
+galleryList.addEventListener('click', OpenModal);
 
-function onOpenModal(event) {
+function OpenModal(event) {
 	event.preventDefault();
 	if (!event.target.classList.contains('gallery__image')) {
 		return;
 	}
 }
 
-function onCloseModal(event) {
+function CloseModal(event) {
 	if (event.code === 'Escape') {
 		instance.close();
 	}
