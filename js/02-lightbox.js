@@ -13,7 +13,7 @@ const galleryMap = galleryItems
 	.join('');
 galleryList.innerHTML = galleryMap;
 
-galleryList.addEventListener('click', OpenModal);
+// galleryList.addEventListener('click', OpenModal);
 
 function OpenModal(event) {
 	event.preventDefault();
